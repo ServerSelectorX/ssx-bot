@@ -29,7 +29,7 @@ public class App {
 
         api.addServerMemberJoinListener(event -> {
         	final ServerTextChannel general = (ServerTextChannel) server.getChannelById(338607425097695235L).get();
-        	final ServerTextChannel welcome = (ServerTextChannel) server.getChannelById(341568814078754816L).get();
+        	final ServerTextChannel welcome = (ServerTextChannel) server.getChannelById(536534866703941652L).get();
         	final ServerTextChannel information = (ServerTextChannel) server.getChannelById(472459616886849536L).get();
         	general.sendMessage(String.format(
         			"Welcome to the server, %s! Please read %s and %s. If you need help, create a ticket by typing `!ticket`.",
