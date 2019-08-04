@@ -90,11 +90,7 @@ public class App {
             }
 
             if (event.getMessageContent().equalsIgnoreCase("!items")) {
-            	final String message = "You must use item names that are listed in the links below:\n" +
-            			"New version: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html\n" +
-            			"Legacy version: http://docs.codelanx.com/Bukkit/1.8/org/bukkit/Material.html\n\n" +
-            			"New version = Free-3.4.0+ or Premium-2.0.0 (non legacy)\n" +
-            			"Legacy version = Free-3.1.1, Premium-1.4.4 or Premium-2.0.0-legacy";
+            	final String message = "Item names list: https://github.com/ServerSelectorX/ServerSelectorX/wiki/Item-names";
             	event.getChannel().sendMessage(message);
             	event.getMessage().delete();
             }
