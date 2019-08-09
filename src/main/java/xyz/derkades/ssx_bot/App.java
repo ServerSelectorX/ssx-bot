@@ -31,9 +31,12 @@ public class App {
         	final ServerTextChannel general = (ServerTextChannel) server.getChannelById(338607425097695235L).get();
         	final ServerTextChannel welcome = (ServerTextChannel) server.getChannelById(536534866703941652L).get();
         	final ServerTextChannel information = (ServerTextChannel) server.getChannelById(472459616886849536L).get();
-        	general.sendMessage(String.format(
-        			"Welcome to the server, %s! Please read %s and %s. If you need help, create a ticket by typing `!ticket`.",
-        			event.getUser().getMentionTag(), welcome.getMentionTag(), information.getMentionTag()));
+        	general.sendMessage(new EmbedBuilder()
+        			.addField("Welcome", String.format(
+        					"Welcome to the server, %s! Please read %s and %s. If you need help ask here or create a ticket "
+        					+ "by typing `!ticket`.",
+        					event.getUser().getMentionTag(), welcome.getMentionTag(), information.getMentionTag()))
+        			.setFooter("Do not DM staff for support."));
         });
 
         api.addMessageCreateListener(event -> {
