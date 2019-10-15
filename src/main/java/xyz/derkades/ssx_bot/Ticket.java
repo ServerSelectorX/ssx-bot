@@ -51,7 +51,7 @@ public class Ticket {
 
 		channel.sendMessage(this.server.getRolesByName("Support").get(0).getMentionTag());
 		channel.sendMessage(new EmbedBuilder()
-				.addField("Ticket created", "A ticket has been created. When you're done, close it by typing `!close` in this channel.")
+				.addField("Ticket created", "A ticket has been created. When your problem is solved, close it by typing `!close` in this channel.")
 				.addField("What do you need help with?", "Describe your issue as clearly as possible. Include your "
 						+ "Minecraft version and ServerSelectorX version. If an issue occured after modifying configuration "
 						+ "files, send them by dragging them to this channel or uploading them to https://hasteb.in")
@@ -64,9 +64,9 @@ public class Ticket {
 
 	void delete() {
 		final ServerTextChannel general = (ServerTextChannel) this.server.getChannelById(338607425097695235L).get();
-		general.sendMessage("Ticket " + this.getChannel().getMentionTag() + " has been closed");
+		general.sendMessage("Ticket " + getChannel().getMentionTag() + " has been closed");
 
-		this.getChannel().sendMessage(new EmbedBuilder()
+		getChannel().sendMessage(new EmbedBuilder()
 				.addField("Ticket closed", "This ticket has been closed. The channel will be deleted automatically in 12 hours.")
 				);
 
@@ -100,9 +100,8 @@ public class Ticket {
 	static int getAvailableId(final Server server) {
 		while (true) {
 			final int id = (int) (Math.random() * 9999);
-			if (!channelExists(server, "ticket-" + id)) {
+			if (!channelExists(server, "ticket-" + id))
 				return id;
-			}
 		}
 
 	}
