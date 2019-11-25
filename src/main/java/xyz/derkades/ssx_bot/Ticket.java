@@ -57,18 +57,21 @@ public class Ticket {
 						+ "files, send them by dragging them to this channel or uploading them to https://hasteb.in")
 				);
 
+		final int openTickets = getTickets(channel.getServer()).size();
+
 		originalTextChannel.sendMessage(new EmbedBuilder()
 				.addField("Ticket created", "A ticket has been created, see the channel " + channel.getMentionTag())
+				.setFooter("There are currently " + openTickets + " open tickets.")
 				);
 	}
 
 	void delete() {
 		final ServerTextChannel general = (ServerTextChannel) this.server.getChannelById(338607425097695235L).get();
-		general.sendMessage("Ticket " + getChannel().getMentionTag() + " has been closed");
+		general.sendMessage(new EmbedBuilder().addField("Ticket closed",
+				"Ticket " + this.getChannel().getMentionTag() + " has been closed"));
 
-		getChannel().sendMessage(new EmbedBuilder()
-				.addField("Ticket closed", "This ticket has been closed. The channel will be deleted automatically in 12 hours.")
-				);
+		this.getChannel().sendMessage(new EmbedBuilder().addField("Ticket closed",
+				"This ticket has been closed. The channel will be deleted automatically in 12 hours."));
 
 		new Timer().schedule(new TimerTask() {
 			@Override
@@ -92,7 +95,9 @@ public class Ticket {
 
 	static boolean channelExists(final Server server, final String channelName) {
 		for (final Ticket ticket : getTickets(server)) {
-			if (ticket.getChannelName().equals(channelName)) return true;
+			if (ticket.getChannelName().equals(channelName)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -100,8 +105,9 @@ public class Ticket {
 	static int getAvailableId(final Server server) {
 		while (true) {
 			final int id = (int) (Math.random() * 9999);
-			if (!channelExists(server, "ticket-" + id))
+			if (!channelExists(server, "ticket-" + id)) {
 				return id;
+			}
 		}
 
 	}
