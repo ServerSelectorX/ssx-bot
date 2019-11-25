@@ -49,7 +49,7 @@ public class Ticket {
 			.addPermissionOverwrite(this.server.getRolesByName("Support").get(0), new PermissionsBuilder().setState(PermissionType.READ_MESSAGES, PermissionState.ALLOWED).build())
 			.create().get();
 
-		channel.sendMessage(this.server.getRolesByName("Support").get(0).getMentionTag());
+//		channel.sendMessage(this.server.getRolesByName("Support").get(0).getMentionTag());
 		channel.sendMessage(new EmbedBuilder()
 				.addField("Ticket created", "A ticket has been created. When your problem is solved, close it by typing `!close` in this channel.")
 				.addField("What do you need help with?", "Describe your issue as clearly as possible. Include your "
