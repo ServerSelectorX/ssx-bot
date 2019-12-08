@@ -99,9 +99,18 @@ public class App {
             }
 
             if (event.getMessageContent().equalsIgnoreCase("!error")) {
-            	final String message = "It looks like you need help with an error. Please describe exactly what happens and what you expect to happen. Send your /logs/latest.log file and any relevant menu files (usually just default.yml). Please use https://hastebin.com or attach the files directly in discord.";
+            	final String message = "Please describe exactly what happens and what you expect to happen. Send your /logs/latest.log file and any relevant menu files (usually just default.yml). Please use https://hastebin.com or attach the files directly in discord.";
 
             	event.getChannel().sendMessage(message);
+            	event.getMessage().delete();
+            }
+
+            if (event.getMessageContent().equalsIgnoreCase("!verify")) {
+            	event.getChannel().sendMessage(new EmbedBuilder()
+            			.addField("Premium verification", "To get a premium role, send a message on spigot with your"
+            					+ " discord username by clicking the following link:"
+            					+ " https://www.spigotmc.org/conversations/add?to=RobinMC.")
+            			);
             	event.getMessage().delete();
             }
         });
