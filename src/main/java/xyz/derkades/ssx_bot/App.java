@@ -109,7 +109,7 @@ public class App {
             	event.getChannel().sendMessage(new EmbedBuilder()
             			.addField("Premium verification", "To get a premium role, send a message on spigot with your"
             					+ " discord username by clicking the following link:"
-            					+ " https://www.spigotmc.org/conversations/add?to=RobinMC.")
+            					+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification.")
             			);
             	event.getMessage().delete();
             }
