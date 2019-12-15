@@ -15,7 +15,8 @@ public class App {
 	private static final EmbedBuilder EMBED_HELP = new EmbedBuilder()
 			.setTitle("Command help")
 			.addField("Tickets", "`!ticket` - Create a new ticket.\n`!close` - Close a ticket.")
-			.addField("Support", "`!faq <question>` to send question help or `!faq` for a list of questions\n`!items`\n`!error`")
+			.addField("Support", "`!faq <question>` to send question help or `!faq` for a list of questions\n`!items`\n`!error`.")
+			.addField("Premium", "`!verify` for premium verification instructions.")
 			.setColor(Color.GREEN);
 
     public static void main(final String[] args) {
