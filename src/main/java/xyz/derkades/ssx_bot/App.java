@@ -21,7 +21,16 @@ public class App {
 
     public static void main(final String[] args) {
     	System.out.println("Starting..");
-    	final String token = args[0];
+    	final String token;
+    	if (args.length == 1) {
+    		System.out.println("Argument provided, assuming argument is token.");
+    		token = args[0];
+    	} else {
+    		System.out.println("No argument provided, using enviroment variable SSXBOT_TOKEN");
+    		token = System.getenv("SSXBOT_TOKEN");
+    	}
+
+    	System.out.println("Token: " + token);
 
         final DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
         final Server server = api.getServerById(338607425097695235L).get();
