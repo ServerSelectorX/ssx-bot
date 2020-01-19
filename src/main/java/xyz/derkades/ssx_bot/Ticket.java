@@ -66,9 +66,9 @@ public class Ticket {
 	}
 
 	void delete() {
-		final ServerTextChannel general = (ServerTextChannel) this.server.getChannelById(338607425097695235L).get();
-		general.sendMessage(new EmbedBuilder().addField("Ticket closed",
-				"Ticket " + this.getChannel().getMentionTag() + " has been closed"));
+//		final ServerTextChannel general = (ServerTextChannel) this.server.getChannelById(338607425097695235L).get();
+//		general.sendMessage(new EmbedBuilder().addField("Ticket closed",
+//				"Ticket " + this.getChannel().getMentionTag() + " has been closed"));
 
 		this.getChannel().sendMessage(new EmbedBuilder().addField("Ticket closed",
 				"This ticket has been closed. The channel will be deleted automatically in 12 hours."));
