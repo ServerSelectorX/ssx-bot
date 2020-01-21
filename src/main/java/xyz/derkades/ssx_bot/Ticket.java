@@ -60,7 +60,7 @@ public class Ticket {
 		final int openTickets = getTickets(channel.getServer()).size();
 
 		originalTextChannel.sendMessage(new EmbedBuilder()
-				.addField("Ticket created", "A ticket has been created, see the channel " + channel.getName().substring(7))
+				.addField("Ticket created", "A ticket has been created (" + channel.getName().substring(7) + ")")
 				.setFooter("There are currently " + openTickets + " open tickets.")
 				);
 	}
