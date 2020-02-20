@@ -71,7 +71,7 @@ public class Ticket {
 //				"Ticket " + this.getChannel().getMentionTag() + " has been closed"));
 
 		this.getChannel().sendMessage(new EmbedBuilder().addField("Ticket closed",
-				"This ticket has been closed. The channel will be deleted automatically in 12 hours."));
+				"This ticket has been closed. The channel will be deleted in 12 hours."));
 
 		new Timer().schedule(new TimerTask() {
 			@Override
