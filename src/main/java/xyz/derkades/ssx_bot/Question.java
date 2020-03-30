@@ -16,7 +16,7 @@ public enum Question {
 
 	PREMIUM_DYNAMIC("premium dynamic", "Dynamic items: <https://github.com/ServerSelectorX/ServerSelectorX/wiki/Premium-dynamic-v2>"),
 	PREMIUM_INSTALL("premium install", "You can find installation instructions for the premium version of ServerSelectorX here: <https://github.com/ServerSelectorX/ServerSelectorX/wiki/Premium-%7C-Installation-Instructions>"),
-	PREMIUM_INSTALL_CONNECTOR("connector install", "For SSX-Connector installation instructions, see <hhttps://github.com/ServerSelectorX/ServerSelectorX/wiki/Installing-SSX-Connector>"),
+	PREMIUM_INSTALL_CONNECTOR("connector install", "For SSX-Connector installation instructions, see <https://github.com/ServerSelectorX/ServerSelectorX/wiki/Installing-SSX-Connector>"),
 	;
 
 	String question;
