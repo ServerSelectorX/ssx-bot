@@ -6,7 +6,6 @@ import java.util.concurrent.ExecutionException;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.activity.ActivityType;
-import org.javacord.api.entity.channel.ServerTextChannel;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.server.Server;
 
@@ -37,16 +36,15 @@ public class App {
 
         api.updateActivity(ActivityType.WATCHING, "for you to type !help");
 
-        api.addServerMemberJoinListener(event -> {
-        	final ServerTextChannel general = (ServerTextChannel) server.getChannelById(338607425097695235L).get();
-        	final ServerTextChannel welcome = (ServerTextChannel) server.getChannelById(536534866703941652L).get();
-        	general.sendMessage(new EmbedBuilder()
-        			.addField("Welcome", String.format(
-        					"Welcome to the server, %s! Please read %s. If you need help ask here or create a ticket "
-        					+ "by typing `!ticket`.",
-        					event.getUser().getMentionTag(), welcome.getMentionTag()))
-        			.setFooter("Please do not DM staff."));
-        });
+//        api.addServerMemberJoinListener(event -> {
+//        	final ServerTextChannel general = (ServerTextChannel) server.getChannelById(338607425097695235L).get();
+//        	final ServerTextChannel welcome = (ServerTextChannel) server.getChannelById(536534866703941652L).get();
+//        	general.sendMessage(new EmbedBuilder()
+//        			.addField("Welcome", String.format(
+//        					"Welcome to the server, %s! Please read %s.",
+//        					event.getUser().getMentionTag(), welcome.getMentionTag()))
+//        			.setFooter("Please do not DM staff."));
+//        });
 
         api.addMessageCreateListener(event -> {
         	if (event.getMessageContent().equalsIgnoreCase("!ticket")) {
