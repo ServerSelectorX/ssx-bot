@@ -13,20 +13,16 @@ public class App {
 
 	private static final EmbedBuilder EMBED_HELP = new EmbedBuilder()
 			.setTitle("Command help")
-			.addField("Tickets", "`!ticket` - Create a new ticket.\n`!close` - Close a ticket.")
-			.addField("Support", "`!faq <question>` to send question help or `!faq` for a list of questions\n`!items`\n`!error`.")
+			.addField("Tickets", "`!ticket` - Create a new ticket.")
+			.addField("Support", "``!items`, `!error`, '!actions', `!wiki`.")
 			.addField("Premium", "`!verify` for premium verification instructions.")
 			.setColor(Color.GREEN);
 
     public static void main(final String[] args) {
-    	System.out.println("Starting..");
-    	final String token;
-    	if (args.length == 1) {
-    		System.out.println("Argument provided, assuming argument is token.");
-    		token = args[0];
-    	} else {
-    		System.out.println("No argument provided, using enviroment variable SSXBOT_TOKEN");
-    		token = System.getenv("SSXBOT_TOKEN");
+    	final String token = System.getenv("SSXBOT_TOKEN");
+    	if (token == null) {
+    		System.err.println("No token provided");
+    		System.exit(1);
     	}
 
     	System.out.println("Token: " + token);
@@ -34,7 +30,8 @@ public class App {
         final DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
         final Server server = api.getServerById(338607425097695235L).get();
 
-        api.updateActivity(ActivityType.WATCHING, "for you to type !help");
+//        api.updateActivity(ActivityType.WATCHING, "for you to type !help");
+        api.updateActivity(ActivityType.LISTENING, "hard drives clicking");
 
 //        api.addServerMemberJoinListener(event -> {
 //        	final ServerTextChannel general = (ServerTextChannel) server.getChannelById(338607425097695235L).get();
@@ -47,7 +44,15 @@ public class App {
 //        });
 
         api.addMessageCreateListener(event -> {
-        	if (event.getMessageContent().equalsIgnoreCase("!ticket")) {
+        	final String message = event.getMessageContent();
+        	
+        	if (message.charAt(0) != '!') {
+        		return;
+        	}
+        	
+        	switch(message) {
+        	
+        	case "!ticket":
         		try {
 					new Ticket(server, Ticket.getAvailableId(server)).create(event.getServerTextChannel().get(),
 							event.getMessageAuthor().asUser().get());
@@ -55,9 +60,13 @@ public class App {
 					event.getChannel().sendMessage("An error occured while trying to create a ticket.");
 					e.printStackTrace();
 				}
-        	}
-
-        	if (event.getMessageContent().equalsIgnoreCase("!close")) {
+        		break;
+        		
+        	case "!close:":
+        		if (event.getMessageAuthor().getId() != 183954832485253121L) {
+        			return;
+        		}
+        		
         		boolean inTicketChannel = false;
 
         		for (final Ticket ticket : Ticket.getTickets(server)) {
@@ -72,54 +81,33 @@ public class App {
         		} else {
         			event.getChannel().sendMessage("This command can only be used in a ticket channel.");
         		}
-        	}
-
-            if (event.getMessageContent().equalsIgnoreCase("!help")) {
-                event.getChannel().sendMessage(EMBED_HELP);
-                event.getMessage().delete();
-            }
-
-            if (event.getMessageContent().startsWith("!faq ")) {
-            	final String askedQuestion = event.getMessageContent().substring(5);
-            	System.out.println(askedQuestion);
-            	for (final Question question : Question.values()) {
-            		if (question.question.equalsIgnoreCase(askedQuestion)) {
-            			event.getChannel().sendMessage(question.answer);
-            			event.getMessage().delete();
-            			return;
-            		}
-            	}
-
-            	event.getChannel().sendMessage(Question.getHelpEmbed());
-            	event.getMessage().delete();
-            }
-
-            if (event.getMessageContent().equalsIgnoreCase("!faq")) {
-            	event.getChannel().sendMessage(Question.getHelpEmbed());
-            	event.getMessage().delete();
-            }
-
-            if (event.getMessageContent().equalsIgnoreCase("!items")) {
-            	final String message = "Item names list: https://github.com/ServerSelectorX/ServerSelectorX/wiki/Item-names";
-            	event.getChannel().sendMessage(message);
-            	event.getMessage().delete();
-            }
-
-            if (event.getMessageContent().equalsIgnoreCase("!error")) {
-            	final String message = "Please describe exactly what happens and what you expect to happen. Send your /logs/latest.log file and any relevant menu files (usually just default.yml). Please use https://hastebin.com or attach the files directly in discord.";
-
-            	event.getChannel().sendMessage(message);
-            	event.getMessage().delete();
-            }
-
-            if (event.getMessageContent().equalsIgnoreCase("!verify")) {
-            	event.getChannel().sendMessage(new EmbedBuilder()
+        		break;
+        		
+        	case "!error":
+            	event.getChannel().sendMessage("Please describe exactly what happens and what you expect to happen. "
+            			+ "Send your /logs/latest.log file and any relevant menu files (usually just default.yml). "
+        				+ "Please use https://hasteb.in or attach the files directly in discord.");
+            	break;
+            	
+        	case "!items:":
+	        	event.getChannel().sendMessage("Item names list: https://github.com/ServerSelectorX/ServerSelectorX/wiki/Item-names");
+	        	break;
+        	case "!verify":
+               	event.getChannel().sendMessage(new EmbedBuilder()
             			.addField("Premium verification", "To get a premium role, send a message on spigot with your"
             					+ " discord username by clicking the following link:"
             					+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification.")
             			);
-            	event.getMessage().delete();
-            }
+               	break;
+        	case "!actions":
+        		event.getChannel().sendMessage(new EmbedBuilder().setTitle("Actions list")
+        				.addField("Free version", "https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions")
+        				.addField("Premium version", "https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions-v2"));
+        	case "!wiki":
+        		event.getChannel().sendMessage("https://github.com/ServerSelectorX/ServerSelectorX/wiki");
+           	default:
+           		event.getChannel().sendMessage(EMBED_HELP);
+        	}
         });
 
         System.out.println("SSX Bot Started.");
