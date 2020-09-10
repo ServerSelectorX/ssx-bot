@@ -14,7 +14,7 @@ public class App {
 	private static final EmbedBuilder EMBED_HELP = new EmbedBuilder()
 			.setTitle("Command help")
 			.addField("Tickets", "`!ticket` - Create a new ticket.")
-			.addField("Support", "``!items`, `!error`, '!actions', `!wiki`.")
+			.addField("Support", "``!items`, `!error`, `!actions`, `!wiki`.")
 			.addField("Premium", "`!verify` for premium verification instructions.")
 			.setColor(Color.GREEN);
 
@@ -89,7 +89,7 @@ public class App {
         				+ "Please use https://hasteb.in or attach the files directly in discord.");
             	break;
             	
-        	case "!items:":
+        	case "!items":
 	        	event.getChannel().sendMessage("Item names list: https://github.com/ServerSelectorX/ServerSelectorX/wiki/Item-names");
 	        	break;
         	case "!verify":
