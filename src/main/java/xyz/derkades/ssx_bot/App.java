@@ -62,7 +62,7 @@ public class App {
 				}
         		break;
         		
-        	case "!close:":
+        	case "!close":
         		if (event.getMessageAuthor().getId() != 183954832485253121L) {
         			return;
         		}
@@ -103,8 +103,10 @@ public class App {
         		event.getChannel().sendMessage(new EmbedBuilder().setTitle("Actions list")
         				.addField("Free version", "https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions")
         				.addField("Premium version", "https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions-v2"));
+        		break;
         	case "!wiki":
         		event.getChannel().sendMessage("https://github.com/ServerSelectorX/ServerSelectorX/wiki");
+        		break;
            	default:
            		event.getChannel().sendMessage(EMBED_HELP);
         	}
