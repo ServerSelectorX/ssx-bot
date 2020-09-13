@@ -14,7 +14,7 @@ public class App {
 	private static final EmbedBuilder EMBED_HELP = new EmbedBuilder()
 			.setTitle("Command help")
 			.addField("Tickets", "`!ticket` - Create a new ticket.")
-			.addField("Support", "``!items`, `!error`, `!actions`, `!wiki`.")
+			.addField("Support", "``!items`, `!error`, `!actions`, `!wiki`, `!connector`.")
 			.addField("Premium", "`!verify` for premium verification instructions.")
 			.setColor(Color.GREEN);
 
@@ -67,21 +67,22 @@ public class App {
         			return;
         		}
         		
-        		boolean inTicketChannel = false;
+				boolean inTicketChannel = false;
 
-        		for (final Ticket ticket : Ticket.getTickets(server)) {
-        			if (ticket.getChannelName().equals(event.getServerTextChannel().get().getName())){
-        				inTicketChannel = true;
-        			}
-        		}
+				for (final Ticket ticket : Ticket.getTickets(server)) {
+					if (ticket.getChannelName().equals(event.getServerTextChannel().get().getName())) {
+						inTicketChannel = true;
+					}
+				}
 
-        		if (inTicketChannel) {
-        			final Ticket ticket = new Ticket(server, event.getServerTextChannel().get().getName());
-        			ticket.delete();
-        		} else {
-        			event.getChannel().sendMessage("This command can only be used in a ticket channel.");
-        		}
-        		break;
+				if (inTicketChannel) {
+					final Ticket ticket = new Ticket(server, event.getServerTextChannel().get().getName());
+					ticket.delete();
+				} else {
+					event.getChannel().sendMessage("This command can only be used in a ticket channel.");
+				}
+				
+				break;
         		
         	case "!error":
             	event.getChannel().sendMessage("Please describe exactly what happens and what you expect to happen. "
@@ -89,28 +90,40 @@ public class App {
         				+ "Please use https://hasteb.in or attach the files directly in discord.");
             	break;
             	
-        	case "!items":
-	        	event.getChannel().sendMessage("Item names list: https://github.com/ServerSelectorX/ServerSelectorX/wiki/Item-names");
-	        	break;
-        	case "!verify":
-               	event.getChannel().sendMessage(new EmbedBuilder()
-            			.addField("Premium verification", "To get a premium role, send a message on spigot with your"
-            					+ " discord username by clicking the following link:"
-            					+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification.")
-            			);
-               	break;
-        	case "!actions":
-        		event.getChannel().sendMessage(new EmbedBuilder().setTitle("Actions list")
-        				.addField("Free version", "https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions")
-        				.addField("Premium version", "https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions-v2"));
-        		break;
-        	case "!wiki":
-        		event.getChannel().sendMessage("https://github.com/ServerSelectorX/ServerSelectorX/wiki");
-        		break;
-           	default:
-           		event.getChannel().sendMessage(EMBED_HELP);
-        	}
-        });
+			case "!items":
+				event.getChannel().sendMessage(
+						"Item names list: https://github.com/ServerSelectorX/ServerSelectorX/wiki/Item-names");
+				break;
+				
+			case "!verify":
+				event.getChannel().sendMessage(new EmbedBuilder().addField("Premium verification",
+						"To get a premium role, send a message on spigot with your"
+								+ " discord username by clicking the following link:"
+								+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification."));
+				break;
+				
+			case "!actions":
+				event.getChannel()
+						.sendMessage(new EmbedBuilder().setTitle("Actions list")
+								.addField("Free version",
+										"https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions")
+								.addField("Premium version",
+										"https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions-v2"));
+				break;
+				
+			case "!wiki":
+				event.getChannel().sendMessage("https://github.com/ServerSelectorX/ServerSelectorX/wiki");
+				break;
+				
+			case "!connector":
+				event.getChannel().sendMessage(
+						"https://github.com/ServerSelectorX/ServerSelectorX/wiki/Installing-SSX-Connector");
+				break;
+				
+			default:
+				event.getChannel().sendMessage(EMBED_HELP);
+			}
+		});
 
         System.out.println("SSX Bot Started.");
     }
