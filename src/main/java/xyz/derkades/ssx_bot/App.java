@@ -46,7 +46,8 @@ public class App {
         api.addMessageCreateListener(event -> {
         	final String message = event.getMessageContent();
         	
-        	if (message.charAt(0) != '!') {
+        	if (message.length() < 1 || // Not sure how but it is possible
+        			message.charAt(0) != '!') {
         		return;
         	}
         	
