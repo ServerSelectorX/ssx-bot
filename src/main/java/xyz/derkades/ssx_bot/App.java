@@ -14,7 +14,7 @@ public class App {
 	private static final EmbedBuilder EMBED_HELP = new EmbedBuilder()
 			.setTitle("Command help")
 			.addField("Tickets", "`!ticket` - Create a new ticket.")
-			.addField("Support", "``!items`, `!error`, `!actions`, `!wiki`, `!connector`.")
+			.addField("Support", "`!items`, `!error`, `!actions`, `!wiki`, `!connector`.")
 			.addField("Premium", "`!verify` for premium verification instructions.")
 			.setColor(Color.GREEN);
 
@@ -46,7 +46,7 @@ public class App {
         api.addMessageCreateListener(event -> {
         	final String message = event.getMessageContent();
         	
-        	if (message.length() < 1 || // Not sure how but it is possible
+        	if (message.length() < 1 || // Empty messages (e.g. attachments)
         			message.charAt(0) != '!') {
         		return;
         	}
@@ -100,7 +100,9 @@ public class App {
 				event.getChannel().sendMessage(new EmbedBuilder().addField("Premium verification",
 						"To get a premium role, send a message on spigot with your"
 								+ " discord username by clicking the following link:"
-								+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification."));
+								+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification. "
+								+ "Unfortunately, recently spigotmc.org disabled direct messages for accounts with fewer "
+								+ "than 5 forum posts. If this is the case for you, please tell @Derkades your Spigot username."));
 				break;
 				
 			case "!actions":
