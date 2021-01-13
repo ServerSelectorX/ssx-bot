@@ -56,7 +56,7 @@ public class Ticket {
 				.addField("Ticket created", "A ticket has been created.")
 				.addField("What do you need help with?", "Describe your issue as clearly as possible. Include your "
 						+ "Minecraft version and ServerSelectorX version. If an issue occured after modifying configuration "
-						+ "files, send them by dragging them to this channel or uploading them to https://hasteb.in");
+						+ "files, send them by dragging them to this channel or uploading them to https://paste.derkad.es");
 		
 		if (!creator.getRoles(this.server).stream().map(Role::getId).anyMatch(Predicate.isEqual(352135799543693312L))) {
 			createdMessage.addField("Premium", "If you need support for the premium version, please verify your account using `!verify`");

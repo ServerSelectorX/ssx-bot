@@ -88,7 +88,8 @@ public class App {
         	case "!error":
             	event.getChannel().sendMessage("Please describe exactly what happens and what you expect to happen. "
             			+ "Send your /logs/latest.log file and any relevant menu files (usually just default.yml). "
-        				+ "Please use https://hasteb.in or attach the files directly in discord.");
+        				+ "Please use https://paste.derkad.es or attach the files directly in Discord, avoid pastebin "
+        				+ "since it has annoying captchas.");
             	break;
             	
 			case "!items":
