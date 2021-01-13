@@ -118,6 +118,10 @@ public class App {
 				event.getChannel().sendMessage("https://github.com/ServerSelectorX/ServerSelectorX/wiki");
 				break;
 				
+			case "!heads":
+				event.getChannel().sendMessage("https://github.com/ServerSelectorX/ServerSelectorX/wiki/Player-heads");
+				break;
+				
 			case "!connector":
 				event.getChannel().sendMessage(
 						"https://github.com/ServerSelectorX/ServerSelectorX/wiki/Installing-SSX-Connector");
