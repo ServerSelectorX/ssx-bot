@@ -14,7 +14,7 @@ public class App {
 	private static final EmbedBuilder EMBED_HELP = new EmbedBuilder()
 			.setTitle("Command help")
 			.addField("Tickets", "`!ticket` - Create a new ticket.")
-			.addField("Support", "`!items`, `!error`, `!actions`, `!wiki`, `!connector`.")
+			.addField("Support", "`!items`, `!error`, `!actions`, `!wiki`, `!connector`, `!heads`.")
 			.addField("Premium", "`!verify` for premium verification instructions.")
 			.setColor(Color.GREEN);
 
@@ -45,14 +45,14 @@ public class App {
 
         api.addMessageCreateListener(event -> {
         	final String message = event.getMessageContent();
-        	
+
         	if (message.length() < 1 || // Empty messages (e.g. attachments)
         			message.charAt(0) != '!') {
         		return;
         	}
-        	
+
         	switch(message) {
-        	
+
         	case "!ticket":
         		try {
 					new Ticket(server, Ticket.getAvailableId(server)).create(event.getServerTextChannel().get(),
@@ -62,12 +62,12 @@ public class App {
 					e.printStackTrace();
 				}
         		break;
-        		
+
         	case "!close":
         		if (event.getMessageAuthor().getId() != 183954832485253121L) {
         			return;
         		}
-        		
+
 				boolean inTicketChannel = false;
 
 				for (final Ticket ticket : Ticket.getTickets(server)) {
@@ -82,21 +82,21 @@ public class App {
 				} else {
 					event.getChannel().sendMessage("This command can only be used in a ticket channel.");
 				}
-				
+
 				break;
-        		
+
         	case "!error":
             	event.getChannel().sendMessage("Please describe exactly what happens and what you expect to happen. "
             			+ "Send your /logs/latest.log file and any relevant menu files (usually just default.yml). "
         				+ "Please use https://paste.derkad.es or attach the files directly in Discord, avoid pastebin "
         				+ "since it has annoying captchas.");
             	break;
-            	
+
 			case "!items":
 				event.getChannel().sendMessage(
 						"Item names list: https://github.com/ServerSelectorX/ServerSelectorX/wiki/Item-names");
 				break;
-				
+
 			case "!verify":
 				event.getChannel().sendMessage(new EmbedBuilder().addField("Premium verification",
 						"To get a premium role, send a message on spigot with your"
@@ -105,7 +105,7 @@ public class App {
 								+ "Unfortunately, recently spigotmc.org disabled direct messages for accounts with fewer "
 								+ "than 5 forum posts. If this is the case for you, please tell @Derkades your Spigot username."));
 				break;
-				
+
 			case "!actions":
 				event.getChannel()
 						.sendMessage(new EmbedBuilder().setTitle("Actions list")
@@ -114,20 +114,20 @@ public class App {
 								.addField("Premium version",
 										"https://github.com/ServerSelectorX/ServerSelectorX/wiki/Actions-v2"));
 				break;
-				
+
 			case "!wiki":
 				event.getChannel().sendMessage("https://github.com/ServerSelectorX/ServerSelectorX/wiki");
 				break;
-				
+
 			case "!heads":
 				event.getChannel().sendMessage("https://github.com/ServerSelectorX/ServerSelectorX/wiki/Player-heads");
 				break;
-				
+
 			case "!connector":
 				event.getChannel().sendMessage(
 						"https://github.com/ServerSelectorX/ServerSelectorX/wiki/Installing-SSX-Connector");
 				break;
-				
+
 			default:
 				event.getChannel().sendMessage(EMBED_HELP);
 			}
