@@ -99,11 +99,11 @@ public class App {
 
 			case "!verify":
 				event.getChannel().sendMessage(new EmbedBuilder().addField("Premium verification",
-						"To get a premium role, send a message on spigot with your"
-								+ " discord username by clicking the following link:"
-								+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification. "
-								+ "Unfortunately, recently spigotmc.org disabled direct messages for accounts with fewer "
-								+ "than 5 forum posts. If this is the case for you, please tell @Derkades your Spigot username."));
+						"To get a premium role, please send a message on spigot with your"
+								+ " Discord username by clicking the following link:"
+								+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification (so enter YourName#0000 in the message body)."
+								+ "\n"
+								+ "If you get a permission denied error, please send your Spigot username and we will message you instead. Spigot only allows sending messages if you have at least 5 forum posts."));
 				break;
 
 			case "!actions":
