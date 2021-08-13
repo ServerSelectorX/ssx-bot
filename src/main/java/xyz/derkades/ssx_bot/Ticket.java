@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutionException;
-import java.util.function.Predicate;
 
 import org.javacord.api.entity.channel.ChannelCategory;
 import org.javacord.api.entity.channel.ServerChannel;
@@ -15,7 +14,6 @@ import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.PermissionState;
 import org.javacord.api.entity.permission.PermissionType;
 import org.javacord.api.entity.permission.PermissionsBuilder;
-import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
 
@@ -57,11 +55,11 @@ public class Ticket {
 				.addField("What do you need help with?", "Describe your issue as clearly as possible. Include your "
 						+ "Minecraft version and ServerSelectorX version. If an issue occured after modifying configuration "
 						+ "files, send them by dragging them to this channel or uploading them to https://paste.derkad.es");
-		
-		if (!creator.getRoles(this.server).stream().map(Role::getId).anyMatch(Predicate.isEqual(352135799543693312L))) {
-			createdMessage.addField("Premium", "If you need support for the premium version, please verify your account using `!verify`");
-		}
-		
+
+//		if (!creator.getRoles(this.server).stream().map(Role::getId).anyMatch(Predicate.isEqual(352135799543693312L))) {
+//			createdMessage.addField("Premium", "If you need support for the premium version, please verify your account using `!verify`");
+//		}
+
 		channel.sendMessage(createdMessage);
 
 		final int openTickets = getTickets(this.server).size();

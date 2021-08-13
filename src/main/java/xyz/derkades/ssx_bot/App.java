@@ -2,23 +2,23 @@ package xyz.derkades.ssx_bot;
 
 import java.awt.Color;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Predicate;
 
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
+import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.server.Server;
 
 public class App {
 
-	private static final EmbedBuilder EMBED_HELP = new EmbedBuilder()
-			.setTitle("Command help")
+	private static final EmbedBuilder EMBED_HELP = new EmbedBuilder().setTitle("Command help")
 			.addField("Tickets", "`!ticket` - Create a new ticket.")
 			.addField("Support", "`!items`, `!error`, `!actions`, `!wiki`, `!connector`, `!heads`.")
-			.addField("Premium", "`!verify` for premium verification instructions.")
-			.setColor(Color.GREEN);
+			.addField("Premium", "`!verify` for premium verification instructions.").setColor(Color.GREEN);
 
-    public static void main(final String[] args) {
+	public static void main(final String[] args) {
     	final String token = System.getenv("SSXBOT_TOKEN");
     	if (token == null) {
     		System.err.println("No token provided");
@@ -54,6 +54,12 @@ public class App {
         	switch(message) {
 
         	case "!ticket":
+	        	if (!event.getMessageAuthor().asUser().orElseThrow(() -> new IllegalStateException("Message author is not a user?"))
+	        			.getRoles(server).stream().map(Role::getId).anyMatch(Predicate.isEqual(352135799543693312L))) {
+	    			event.getChannel().sendMessage("This command can only be used by users with a \"Premium\" role. If you have purchased the premium version, please run !verify to get a premium role. Otherwise, feel free to ask your question in this channel.");
+	    			return;
+	    		}
+
         		try {
 					new Ticket(server, Ticket.getAvailableId(server)).create(event.getServerTextChannel().get(),
 							event.getMessageAuthor().asUser().get());
