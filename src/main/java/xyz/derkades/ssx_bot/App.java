@@ -1,15 +1,15 @@
 package xyz.derkades.ssx_bot;
 
-import java.awt.Color;
-import java.util.concurrent.ExecutionException;
-import java.util.function.Predicate;
-
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.activity.ActivityType;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.server.Server;
+
+import java.awt.Color;
+import java.util.concurrent.ExecutionException;
+import java.util.function.Predicate;
 
 public class App {
 
@@ -94,7 +94,7 @@ public class App {
         	case "!error":
             	event.getChannel().sendMessage("Please describe exactly what happens and what you expect to happen. "
             			+ "Send your /logs/latest.log file and any relevant menu files (usually just default.yml). "
-        				+ "Please use https://paste.derkad.es or attach the files directly in Discord, avoid pastebin "
+        				+ "Please use https://paste.rkslot.nl or attach the files directly in Discord, avoid pastebin "
         				+ "since it has annoying captchas.");
             	break;
 
