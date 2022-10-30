@@ -3,6 +3,7 @@ package xyz.derkades.ssx_bot;
 import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.activity.ActivityType;
+import org.javacord.api.entity.intent.Intent;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
 import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.server.Server;
@@ -27,7 +28,12 @@ public class App {
 
     	System.out.println("Token: " + token);
 
-        final DiscordApi api = new DiscordApiBuilder().setToken(token).login().join();
+        final DiscordApi api = new DiscordApiBuilder()
+				.setToken(token)
+				.addIntents(Intent.MESSAGE_CONTENT, Intent.GUILD_MEMBERS)
+				.setUserCacheEnabled(true)
+				.login()
+				.join();
         final Server server = api.getServerById(338607425097695235L).get();
 
 //        api.updateActivity(ActivityType.WATCHING, "for you to type !help");

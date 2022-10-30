@@ -44,9 +44,9 @@ public class Ticket {
 		final ServerTextChannel channel = new ServerTextChannelBuilder(this.server)
 			.setName(this.channelName)
 			.setCategory(this.server.getChannelCategoriesByName("Tickets").get(0))
-			.addPermissionOverwrite(this.server.getEveryoneRole(), new PermissionsBuilder().setState(PermissionType.READ_MESSAGES, PermissionState.DENIED).build())
-			.addPermissionOverwrite(creator, new PermissionsBuilder().setState(PermissionType.READ_MESSAGES, PermissionState.ALLOWED).build())
-			.addPermissionOverwrite(this.server.getRolesByName("Support").get(0), new PermissionsBuilder().setState(PermissionType.READ_MESSAGES, PermissionState.ALLOWED).build())
+			.addPermissionOverwrite(this.server.getEveryoneRole(), new PermissionsBuilder().setState(PermissionType.VIEW_CHANNEL, PermissionState.DENIED).build())
+			.addPermissionOverwrite(creator, new PermissionsBuilder().setState(PermissionType.VIEW_CHANNEL, PermissionState.ALLOWED).build())
+			.addPermissionOverwrite(this.server.getRolesByName("Support").get(0), new PermissionsBuilder().setState(PermissionType.VIEW_CHANNEL, PermissionState.ALLOWED).build())
 			.create().get();
 
 //		channel.sendMessage(this.server.getRolesByName("Support").get(0).getMentionTag());
