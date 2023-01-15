@@ -115,7 +115,7 @@ public class App {
 								+ " Discord username by clicking the following link:"
 								+ " https://www.spigotmc.org/conversations/add?to=RobinMC&title=Premium%20verification (so enter YourName#0000 in the message body)."
 								+ "\n"
-								+ "If you get a permission denied error, please send your Spigot username and we will message you instead. Spigot only allows sending messages if you have at least 5 forum posts."));
+								+ "Spigot only allows sending DMs if you have made at least 5 forum posts using your account. If you get a 'Permission denied' error, please send your Spigot username in this channel and we will message you instead."));
 				break;
 
 			case "!actions":
